@@ -38,8 +38,8 @@ Open the door, when someone is there.
 
 These events fire when the HTML elements you can interact with gain/ lose focus.
 
-- `focus`
-- `blur`
+- `focus` // when element is selected
+- `blur` // when unselected (user clicked away)
 - `focusin` (_new; not supported by Firefox_)
 - `focusout` (_new; same as blur; not supported by Firefox_)
 
@@ -47,8 +47,8 @@ These events fire when the HTML elements you can interact with gain/ lose focus.
 
 ##### Mouse Events
 
-- `click`
-- `dblclick`
+- `click` //when user clicks
+- `dblclick` // double click
 - `mousedown`
 - `mouseup`
 - `mouseover`
@@ -68,25 +68,25 @@ These events fire when the HTML elements you can interact with gain/ lose focus.
 
 ### Form Events
 
-- `submit`
-- `change`
+- `submit` 
+- `change` 
 - `input`
 
 ---
 
 ### HTML5 Events
 
-- `DOMContentLoaded`
-- `hashchange`
-- `beforeunload`
+- `DOMContentLoaded`  // when element is loaded
+- `hashchange`  // when navigating to a specific section of a page (using ID)
+- `beforeunload`  // to use when user is exiting without saving or in a transaction
 
 ---
 
 ### CSS Events
 
-- `transitionend`
-- `animationstart`
-- `animationend`
+- `transitionend` // at end of a transition 
+- `animationstart` // at the start of an animation
+- `animationend`  // at the end of an animation
 
 ---
 
@@ -99,6 +99,19 @@ All DOM nodes have methods we can use to _notify_ us of an event.
 
 ```js
 // Example
+
+const button = document.getElementById('btn');
+
+//define function
+function handleOuch = function(){
+    console.log('ouch!');
+};
+//add event
+button.addEventListener('click', handleOuch);
+
+//revove event
+button.removeEventListener('click', handleOuch);
+
 
 ```
 
@@ -120,9 +133,9 @@ This object includes lots of stuff.
 
 Some events have _default_ actions associated to them.
 
-- click a link
-- press down arrow
-- click `submit` in a Form
+- click a link //sends to a url
+- press down arrow // scrolls down
+- click `submit` in a Form //
 
 In most cases handlers are called _before_ the default action takes place.
 
@@ -178,11 +191,15 @@ let button = document.querySelector("button");
 para.addEventListener("mousedown", () => {
     console.log("Handler for paragraph.");
 });
-
+//a click on a button would trigger button event first and then the paragraph event
 button.addEventListener("mousedown", event => {
     console.log("Handler for button.");
+    // 2 is for a right click
+    // a right click would prevent the event bubbling on the paragragh
     if (event.button == 2) event.stopPropagation();
 });
+
+
 ```
 ---
 

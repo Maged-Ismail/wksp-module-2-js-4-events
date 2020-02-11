@@ -5,6 +5,15 @@
 
 // Hints:
 // - Target the <body>
+const body = document.querySelector('body');
+
+function userClick (event){
+    const message = document.createElement('p');
+    message.innerText = "You Clicked!";
+    body.appendChild(message);
+}
+
+document.addEventListener('click', userClick);
 
 // OPTIONAL
 // Feel free to add some CSS to this once you're done

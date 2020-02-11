@@ -5,3 +5,38 @@
 // a random amount of time (up to 5 seconds) to click the screen.
 
 // It would be a good idea to create a new function that will manage the whole game.
+
+const body = document.querySelector('body');
+const result = document.getElementById('result');
+let timer = document.getElementById('timer');
+const start = document.createElement('p');
+const text = document.querySelector('.time-text');
+text.style.display = 'none';
+start.innerText = 'Click To Start Game'
+body.appendChild(start);
+
+
+body.addEventListener('click', game);
+
+function fastClick (){
+    clicked = true;
+    result.innerText = 'YOU WIN!!';
+    body.removeEventListener('click', fastClick);
+}
+function game(){
+    body.removeEventListener('click', game);
+    start.style.display ='none';
+    text.style.display = 'block';
+    let clicked = false;
+    let rand = Math.round(Math.random()*5);
+    timer.innerText = rand;
+
+    setTimeout(function (){
+        if (!clicked){
+            result.innerText = "YOU LOSE!!";
+            body.removeEventListener('click', fastClick);
+    }
+}, rand * 1000);
+
+body.addEventListener('click', fastClick);
+}
