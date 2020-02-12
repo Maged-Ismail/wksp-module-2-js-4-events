@@ -224,7 +224,7 @@ function pWins(){
 
     body.removeEventListener('keydown', pWins);
     round ++;
-    setTimeout(game(), 555000);
+    setTimeout(game(), 5000);
 }
 
 function pLose(){
@@ -249,7 +249,7 @@ function pLose(){
 
     body.removeEventListener('keydown', pLose);
     round ++;
-    setTimeout(game(), 555000);
+    setTimeout(game(), 5000);
 }
 
 
