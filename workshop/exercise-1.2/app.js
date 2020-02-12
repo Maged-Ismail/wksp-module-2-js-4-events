@@ -20,6 +20,10 @@ let rand = Math.round(Math.random()*5);
 let clicked = false;
 time.innerText = rand;
 
+body.style.fontSize='3rem';
+body.style.textAlign='center';
+body.style.backgroundColor='lightgrey';
+
 function fastClick(){
     clicked = true;
     result.innerText = 'YOU WIN!!';

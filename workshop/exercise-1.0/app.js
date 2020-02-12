@@ -7,6 +7,10 @@
 // - Target the <body>
 const body = document.querySelector('body');
 
+body.style.fontSize='3rem';
+body.style.textAlign='center';
+body.style.backgroundColor='lightgrey';
+
 function userClick (event){
     const message = document.createElement('p');
     message.innerText = "You Clicked!";

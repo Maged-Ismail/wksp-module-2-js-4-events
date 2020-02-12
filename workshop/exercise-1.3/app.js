@@ -14,11 +14,17 @@ const text = document.querySelector('.time-text');
 text.style.display = 'none';
 start.innerText = 'Click To Start Game'
 body.appendChild(start);
+let s;
+
+body.style.fontSize='3rem';
+body.style.textAlign='center';
+body.style.backgroundColor='lightgrey';
 
 
 body.addEventListener('click', game);
 
 function fastClick (){
+    clearTimeout(s);
     clicked = true;
     result.innerText = 'YOU WIN!!';
     body.removeEventListener('click', fastClick);
@@ -31,7 +37,7 @@ function game(){
     let rand = Math.round(Math.random()*5);
     timer.innerText = rand;
 
-    setTimeout(function (){
+    s = setTimeout(function (){
         if (!clicked){
             result.innerText = "YOU LOSE!!";
             body.removeEventListener('click', fastClick);

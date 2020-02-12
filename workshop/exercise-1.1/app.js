@@ -15,6 +15,10 @@ const body = document.querySelector('body');
 
 let clickr = false;
 
+body.style.fontSize='3rem';
+body.style.textAlign='center';
+body.style.backgroundColor='lightgrey';
+
 function quickClick() {
     clickr = true;
     result.innerText= "YOU WIN!!";

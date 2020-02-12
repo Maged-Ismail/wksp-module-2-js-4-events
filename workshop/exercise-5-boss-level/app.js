@@ -11,12 +11,14 @@ let p1Point = 0;
 let p2Point = 0;
 let winner = 0;
 let s;
+let round;
 
                 //Instructions Elements
 const instruct = document.createElement('p');
-instruct.innerText = 'Two players wait for a signal to start after a random delay. Once the start signal, first person to press their key wins. If a player presses before the signal appears, they lose. Player one presses the q key and player 2 presses the p key.';
+instruct.innerText = 'Two players wait for a signal to start after a random delay. Once the start signal, first person to press their key wins. \nIf a player presses before the signal appears, they lose. Player one presses the q key and player 2 presses the p key.';
 instruct.className = 'square';
 instrucMenu.appendChild(instruct);
+
 
 const backBtn = document.createElement('button');
 backBtn.innerText = '<--Back to Menu';
@@ -26,13 +28,13 @@ backBtn.style.fontSize ='1.1rem';
 
                 //Game Elements
 
-let p1 = document.createElement('img');
+const p1 = document.createElement('img');
 p1.src = 'imgs/p1.gif';
 gamePage.appendChild(p1);
 p1.id = 'p1';
 p1.style.maxHeight = '100px';
 p1.style.position = 'absolute';
-p1.style.bottom = '100px';
+p1.style.bottom = '90px';
 p1.style.left = '150px';
 
 const p1Win = document.createElement('img');
@@ -99,8 +101,6 @@ signal.src = 'imgs/signal.png';
 gamePage.appendChild(signal);
 signal.style.maxHeight = '150px';
 signal.style.position = 'absolute';
-signal.style.top = `${Math.round(Math.random()*300)}px`;
-signal.style.right = `${Math.round(Math.random()*100)}px`;
 signal.style.display ='none';
 
 
@@ -150,7 +150,8 @@ function firstRound(){
     gameMusic.currentTime=0;
     p1Point=0;
     p2Point=0;
-    startBtn.removeEventListener('click', game);
+    round =0;
+    startBtn.removeEventListener('click', firstRound);
     instructionsBtn.removeEventListener('click', instructions);
     menu.style.display='none';
     gamePage.style.display = 'block';
@@ -158,32 +159,33 @@ function firstRound(){
 }
 
 function game(){  
-    // resetRound();
+
+    gameMusic.currentTime =0;
+    signal.style.display = 'none';
+    prize.style.display = 'none';
+    p1.style.display='block';
+    p1Win.style.display = 'none';
+    p2.style.display='block';
+    p2Win.style.display = 'none';
+
     if (p1Point === 3){
         alert('Player 1 Wins!');
-        console.log('1');
+        console.log('P1 Wins');
         p1Ring.style.display = 'none';
         p2Ring.style.display = 'none';
-        firstRound();
+        setTimeout(firstRound(), 3000);
     }
     else if (p2Point === 3){
         alert('Player 2 Wins!');
-        console.log('2');
+        console.log('P2 Wins');
         p1Ring.style.display = 'none';
         p2Ring.style.display = 'none';
-        firstRound();
+        setTimeout(firstRound(), 3000);
     } 
     else if (p1Point<4 && p2Point<4){
-        // signal.style.display = 'none';
-        // prize.style.display = 'none';
-        // p1.style.display='block';
-        // p1Win.style.display = 'none';
-        // p2.style.display='block';
-        // p2Win.style.display = 'none';
         gameMusic.play();
         startRound();
     }
-    return;
     }
 
 function startRound(){
@@ -193,23 +195,20 @@ function startRound(){
             body.addEventListener('keydown', pWins);
             gameMusic.pause();
             pauseMusic.play();
+            signal.style.top = `${Math.round(Math.random()*300)}px`;
+            signal.style.right = `${Math.round(Math.random()*100)}px`;
+            signal.style.transform= `rotate(${Math.random() * 360}deg)`;
             signal.style.display ='block';
             prize.style.display = 'block';
-    }, Math.round(Math.random()*5000)+2000);
-    return;
+    }, Math.round(Math.random()*3000)+2000);
 }
 
 function pWins(){
-    let animation;
     if (event.key === 'q'){
         prizeMusic.play();
         prize.style.display = 'none';
-        // p1.style.display='none';
-        // p1Win.style.display = 'block';
-        // animation = setTimeout(function() {
-            p1.setAttribute('src','imgs/p1win.gif');
-            console.log(p1);
-        // },20000);
+        p1.style.display='none';
+        p1Win.style.display = 'block';
         p1Ring.style.display = 'block';
         p1Point ++;
     }
@@ -222,10 +221,10 @@ function pWins(){
         p2Ring.style.display = 'block';
         p2Point ++;
     }
+
     body.removeEventListener('keydown', pWins);
-    // clearTimeout(animation);
-    console.log(animation);
-    resetRound();
+    round ++;
+    setTimeout(game(), 555000);
 }
 
 function pLose(){
@@ -233,9 +232,8 @@ function pLose(){
     if (event.key === 'p'){
         loseMusic.play();
         prize.style.display = 'none';
-        // p1.style.display='none';
-        // p1Win.style.display = 'block';
-        p1.src='imgs/p1win.gif';
+        p1.style.display='none';
+        p1Win.style.display = 'block';
         p1Ring.style.display = 'block';
         p1Point ++;
     }
@@ -248,23 +246,36 @@ function pLose(){
         p2Ring.style.display = 'block';
         p2Point ++;
     }
+
     body.removeEventListener('keydown', pLose);
-    resetRound();
+    round ++;
+    setTimeout(game(), 555000);
 }
 
-function resetRound(){
-    console.log('before',p1);
-    // p1.removeAttribute('src');
-    p1.src='imgs/p1.gif';
-    console.log('after',p1);
-    // loseMusic.pause();
-    gameMusic.currentTime =0;
-    signal.style.display = 'none';
-    prize.style.display = 'none';
-    // p1.style.display='block';
-    // p1Win.style.display = 'none';
 
-    p2.style.display='block';
-    p2Win.style.display = 'none';
-    game();
-}
+
+
+
+
+
+
+
+
+
+
+// function resetRound(){
+//     console.log('before',p1);
+//     // p1.removeAttribute('src');
+//     p1.src='imgs/p1.gif';
+//     console.log('after',p1);
+//     // loseMusic.pause();
+//     gameMusic.currentTime =0;
+//     signal.style.display = 'none';
+//     prize.style.display = 'none';
+//     // p1.style.display='block';
+//     // p1Win.style.display = 'none';
+
+//     p2.style.display='block';
+//     p2Win.style.display = 'none';
+//     game();
+// }
