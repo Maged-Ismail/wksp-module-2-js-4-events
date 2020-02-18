@@ -10,6 +10,29 @@
 // - setTimout is your friend.
 // - You'll a flag to store whether the user has won or lost
 
+const result = document.getElementById('result');
+const body = document.querySelector('body');
+
+let clickr = false;
+
+body.style.fontSize='3rem';
+body.style.textAlign='center';
+body.style.backgroundColor='lightgrey';
+
+function quickClick() {
+    clickr = true;
+    result.innerText= "YOU WIN!!";
+    body.removeEventListener('click', quickClick);
+    }
+
+setTimeout(function() {
+    if (!clickr) {
+        result.innerText= "YOU LOOSE!!";
+        body.removeEventListener('click', quickClick);
+}}, 1000);
+
+
+body.addEventListener('click', quickClick);
 // OPTIONAL
 // Feel free to add some CSS to this once you're done
 // --------------------------------------------------

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>QuickSpeed</title>
+
+        <style>
+            .main {
+                background-image: url('imgs/bg.gif');
+                background-size: cover;
+                height: 97vh;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+            .square {
+                display:block;
+                text-align: center;
+                font-size: 2rem;
+                font-weight: bold;
+                min-width: 300px;
+                padding:25px 30px;
+                margin:20px;
+                color: white;
+                background-color: rgb(54, 74, 110);
+                border: 8px solid grey;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="main" id="main">
+            <div id="menu">
+                <button class='square' id="start">Start Game</button>
+                <button class='square' id='instructions'>Instructions</button>
+            </div>
+            <div id="instrucMenu"></div>
+            <div id="gamePage"></div>
+        </div>
+
+
+        <script src="app.js"></script>
+    </body>
+</html>
